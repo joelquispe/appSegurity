@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -84,13 +85,20 @@ class _MainState extends State<Main> {
     screenLock(
       context: context,
       correctString: '',
+      didError: ((retries) {
+        print("joel");
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Pin invalido"),
+          behavior: SnackBarBehavior.floating,
+        ));
+      }),
       confirmation: true,
       title: Text("Ingrese su patron"),
-      digits: 6,
-      confirmTitle: Text("Exitoso"),
+      digits: 4,
+      confirmTitle: Text("Confirme su patron"),
       didConfirmed: (matchedText) {
         print(matchedText);
-        Navigator.pop(context);
+        Navigator.push(context, MaterialPageRoute(builder: (_) => Home()));
       },
     );
   }
@@ -111,7 +119,6 @@ class _MainState extends State<Main> {
                   fontWeight: FontWeight.bold),
             ),
             Lottie.asset("assets/locked-icon.json", height: 400),
-
             WButton(
               texto: "Biometrico",
               pressed: () {
@@ -131,37 +138,9 @@ class _MainState extends State<Main> {
                 authPin();
               },
             )
-
-            //         Container(
-            //           height: 400,
-            //           width: double.infinity,
-            //           child: PatternLock(
-            //   // color of selected points.
-            //   selectedColor: Colors.red,
-            //   // radius of points.
-            //   pointRadius: 8,
-            //   // whether show user's input and highlight selected points.
-            //   showInput: true,
-            //   key:key ,
-
-            //   // count of points horizontally and vertically.
-            //   dimension: 3,
-            //   // padding of points area relative to distance between points.
-            //   relativePadding: 0.7,
-            //   // needed distance from input to point to select point.
-            //   selectThreshold: 25,
-            //   // whether fill points.
-            //   fillPoints: true,
-            //   // callback that called when user's input complete. Called if user selected one or more points.
-            //   onInputComplete: (List<int> input) {
-            //     print("pattern is $input");
-            //   },
-            // ),
-            //         )
           ],
         ),
       ),
     );
   }
 }
-

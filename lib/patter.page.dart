@@ -26,8 +26,8 @@ class _PatterPageState extends State<PatterPage> {
               width: double.infinity,
               child: PatternLock(
                 // color of selected points.
-                selectedColor: Colors.red,
-                // radius of points.
+                selectedColor: Colors.blue,
+                
                 pointRadius: 8,
                 // whether show user's input and highlight selected points.
                 showInput: true,
@@ -80,31 +80,20 @@ class _PatterPage2State extends State<PatterPage2> {
             height: 400,
             width: double.infinity,
             child: PatternLock(
-              // color of selected points.
               selectedColor: Colors.red,
-              // radius of points.
               pointRadius: 8,
-              // whether show user's input and highlight selected points.
               showInput: true,
-              // count of points horizontally and vertically.
               dimension: 3,
-              // padding of points area relative to distance between points.
               relativePadding: 0.7,
-              // needed distance from input to point to select point.
               selectThreshold: 25,
-              // whether fill points.
               fillPoints: true,
-              // callback that called when user's input complete. Called if user selected one or more points.
               onInputComplete: (List<int> input) {
-                print("pattern is $input");
-                print(numeros);
-
                 if (listEquals(numeros, input) == true) {
                   Navigator.push(
                       context, MaterialPageRoute(builder: (context) => Home()));
                 } else {
                   ScaffoldMessenger.of(context)
-                      .showSnackBar(SnackBar(content: Text("Pin invalido")));
+                      .showSnackBar(SnackBar(content: Text("Patron invalido")));
                 }
               },
             ),
