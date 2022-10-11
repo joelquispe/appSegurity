@@ -1,3 +1,6 @@
+import 'package:appsegurity/home.dart';
+import 'package:appsegurity/patter.page.dart';
+import 'package:appsegurity/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:flutter_screen_lock/flutter_screen_lock.dart';
@@ -62,7 +65,7 @@ class _MainState extends State<Main> {
     );
   }
 
-  void auntenticate() async {
+  void authBiometric() async {
     try {
       final permi = await auth.getAvailableBiometrics();
       bool a = await auth
@@ -70,13 +73,14 @@ class _MainState extends State<Main> {
               localizedReason: "localizedReason",
               options: AuthenticationOptions(biometricOnly: false))
           .then((value) {
+        Navigator.push(context, MaterialPageRoute(builder: (_) => Home()));
         print(value);
         return true;
       });
     } catch (e) {}
   }
 
-  void patronAuthenticate() {
+  void authPin() {
     screenLock(
       context: context,
       correctString: '',
@@ -99,19 +103,34 @@ class _MainState extends State<Main> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Seguridad de ingreso",style: TextStyle(color: Colors.blue.shade600,fontSize: 30,fontWeight: FontWeight.bold),),
+            Text(
+              "Seguridad de ingreso",
+              style: TextStyle(
+                  color: Colors.blue.shade600,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold),
+            ),
             Lottie.asset("assets/locked-icon.json", height: 400),
-            
-             WButton(texto: "Biometrico",pressed: (){
-              
-            },),
-             WButton(texto: "Patron",pressed: (){
-              
-            },),
-            WButton(texto: "Pin",pressed: (){
 
-            },)
-            
+            WButton(
+              texto: "Biometrico",
+              pressed: () {
+                authBiometric();
+              },
+            ),
+            WButton(
+              texto: "Patron",
+              pressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => PatterPage()));
+              },
+            ),
+            WButton(
+              texto: "Pin",
+              pressed: () {
+                authPin();
+              },
+            )
 
             //         Container(
             //           height: 400,
@@ -146,24 +165,3 @@ class _MainState extends State<Main> {
   }
 }
 
-class WButton extends StatelessWidget {
-  final String texto;
-  final void Function()? pressed;
-  const WButton({Key? key,required this.texto,this.pressed}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: pressed,
-      child: Container(
-        margin: EdgeInsets.only(bottom: 10),
-        width: 200,
-        height: 50,
-        decoration: BoxDecoration(
-          color: Colors.blue.shade900,
-          borderRadius: BorderRadius.circular(15)),
-        child: Center(child: Text(texto,style: TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.bold),textAlign: TextAlign.center,)),
-      ),
-    );
-  }
-}
