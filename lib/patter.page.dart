@@ -41,7 +41,7 @@ class _PatterPageState extends State<PatterPage> {
                 fillPoints: true,
                 // callback that called when user's input complete. Called if user selected one or more points.
                 onInputComplete: (List<int> input) {
-                  print("pattern is $input");
+                  
                   numeros = input;
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => PatterPage2()));

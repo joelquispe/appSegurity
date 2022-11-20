@@ -86,7 +86,7 @@ class _MainState extends State<Main> {
       context: context,
       correctString: '',
       didError: ((retries) {
-        print("joel");
+        
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text("Pin invalido"),
           behavior: SnackBarBehavior.floating,

@@ -14,12 +14,12 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: Center(
+      body: SafeArea(
+          child: Center(
         child: Column(
-          
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-          Text(
+            Text(
               "Bienvenido a la seguridad",
               style: TextStyle(
                   color: Colors.blue.shade600,
@@ -27,14 +27,18 @@ class _HomeState extends State<Home> {
                   fontWeight: FontWeight.bold),
             ),
             Lottie.asset("assets/locked-icon.json", height: 400),
-            SizedBox(height:10),
-          WButton(
-                texto: "Salir",
-                pressed: () {
-                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=> Main()), (route) => false);
-                },
-              )
-        ],),
+            SizedBox(height: 10),
+            WButton(
+              texto: "Salir",
+              pressed: () {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (_) => Main()),
+                    (route) => false);
+              },
+            )
+          ],
+        ),
       )),
     );
   }
